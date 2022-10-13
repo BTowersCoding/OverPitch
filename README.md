@@ -9,6 +9,16 @@ This project is written in Clojure, and the dependencies are listed in
 Overtone.
 
 ## Usage
+
+Start the SuperCollider server:
+
+``` powershell
+./scsynth.exe -u 57110
+
+...
+SuperCollider 3 server ready.
+```
+
 Given a the file `your-audio-file.wav` file, you can pitch-shift it by a factor
 1.2 by calling either:
 
