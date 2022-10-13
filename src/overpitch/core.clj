@@ -1,11 +1,13 @@
 (ns overpitch.core
-  (:require [overtone.live :as overtone]
+  (:require [overtone.core :as overtone]
             [clojure.java.io :as io]
             [overpitch.resampling :refer [resample]]
             [overpitch.time-scaling :refer [time-scale]]
             [overpitch.pitch-shifting :refer [pitch-shift]]
             [overpitch.utils :refer [split-channels merge-channels clip]])
   (:gen-class))
+
+(overtone/connect-external-server)
 
 (defn transform-wav
   "Transform the content of a wav file, and writes the result to the given path."
@@ -17,7 +19,7 @@
     (let [input-buffer         (overtone/load-sample input-path)
           input-buffer-info    (overtone/buffer-info input-buffer)
           n-channels           (:n-channels input-buffer-info)
-          input-data           (vec (overtone/buffer-data input-buffer))]
+          input-data           (vec (overtone/buffer-read input-buffer))]
       (overtone/write-wav
         (clip
           (merge-channels
@@ -32,5 +34,7 @@
         input-file (args 0)
         output-file (args 1)
         scale (double (bigdec (args 2)))]
-    ;(transform-wav input-file output-file pitch-shift scale)
+    (transform-wav input-file output-file pitch-shift scale)
     (println "Finished, you can hit Ctrl+C and hear the result in " output-file)))
+
+(-main "test.wav" "test-shift.wav" 0.5)
