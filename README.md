@@ -1,12 +1,15 @@
 # OverPitch
-This library is an implementation of state-of-the-art pitch-shifting algorithms.
+
+This library is an implementation of the STFT phase vocoder algorithm used to change pitch or duration of audio without affecting the other.
+
+This fork has been modified to run in a Windows environment. The `scsynth.exe` binary has been included and the code has been modified to connect to the external server and use the appropriate functions.
+
+The elephant in the room here is Overtone, and the SuperCollider engine, and the fuss of hooking it all up just for the audio file read/write operations. I believe it could be replaced with a few calls to Java SampledSound class, see e.g. Dragan Djuric's [Clojure Sound](https://github.com/uncomplicate/clojure-sound) wrapper library, [Dynne](https://github.com/candera/dynne)
 
 ## Requirements
 This project is written in Clojure, and the dependencies are listed in
 `project.clj`. The simplest way to use this project is to install
 [Leiningen](https://leiningen.org/) and run the command `lein deps`.
-**Note:** you may need to start a JACK server in order to properly start
-Overtone.
 
 ## Usage
 
